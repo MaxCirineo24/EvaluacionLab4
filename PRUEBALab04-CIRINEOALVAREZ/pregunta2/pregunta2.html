@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario de usuarios</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#miFormulario').validate({
+        rules: {
+          edad: {
+            digits: true,
+            min: 18
+          }
+        },
+        messages: {
+          edad: {
+            digits: "Ingrese solo números",
+            min: "Solo se admiten usuarios mayores de edad"
+          }
+        },
+        errorElement: "em",
+        errorPlacement: function ( error, element ) {
+          error.addClass( "invalid-feedback" );
+          if ( element.prop( "type" ) === "checkbox" ) {
+            error.insertAfter( element.next( "label" ) );
+          } else {
+            error.insertAfter( element );
+          }
+        },
+        highlight: function ( element, errorClass, validClass ) {
+          $( element ).addClass( "is-invalid" ).removeClass( "is-valid" );
+        },
+        unhighlight: function (element, errorClass, validClass) {
+          $( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+
+<div class="container">
+  <h1>Formulario de usuarios</h1>
+  <form id="miFormulario" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input type="text" class="form-control" id="nombre" name="nombre" required>
+    </div>
+    <div class="form-group">
+      <label for="apellido">Apellido</label>
+      <input type="text" class="form-control" id="apellido" name="apellido" required>
+    </div>
+    <div class="form-group">
+      <label for="direccion">Dirección</label>
+      <input type="text" class="form-control" id="direccion" name="direccion" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" name="email" required>
+    </div>
+    <div class="form-group">
+      <label for="edad">Edad</label>
+      <input type="number" class="form-control" id="edad" name="edad" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+    <button type="reset" class="btn btn-danger">Limpiar</button>
+  </form>
+
+   <?php
+  if ($_SERVER["REQUEST_METHOD"] == "POST")

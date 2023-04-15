@@ -1,0 +1,26 @@
+p{
+    color: #123F91;
+}
+
+h1{
+    text-decoration: underline;
+}
+
+img{
+    width: 300px;
+}
+
+.list{
+    list-style: none;  
+    align-self: flex-end;  
+}
+
+.link{
+    text-decoration: none;
+}
+
+.link-content{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
